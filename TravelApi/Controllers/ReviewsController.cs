@@ -51,12 +51,25 @@ namespace TravelApi.Controllers
       return review;
     }
 
-    [HttpPost]
-    public async Task<ActionResult<Review>> Post(Review review)
+    [HttpPost("{locationid}/createreview")]
+    public async Task<ActionResult<Review>> Post(Review review, int locationid)
     {
-      _db.Reviews.Add(review);
-      await _db.SaveChangesAsync();    
-      return CreatedAtAction(nameof(GetReview), new { id = review.ReviewId }, review );
+      var thisLocation = _db.Locations.Include(entry => entry.Reviews).FirstOrDefault(entry => entry.LocationId == locationid);
+      if (thisLocation != null)
+      {
+        review.LocationId = thisLocation.LocationId;
+        thisLocation.Reviews.Add(review);
+        _db.Locations.Update(thisLocation);
+        await _db.SaveChangesAsync();
+      }
+      else
+      {
+        return BadRequest();
+      }
+      // _db.Reviews.Add(review);
+      // await _db.SaveChangesAsync();    
+      // return CreatedAtAction("Post", new { id = message.GroupId}, thisGroup);
+      return CreatedAtAction(nameof(GetReview), new { id = review.LocationId }, thisLocation );
     }
 
     [HttpPut ("{id}")]

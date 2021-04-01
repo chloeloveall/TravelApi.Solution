@@ -10,6 +10,7 @@ using TravelApi.Models;
 
 namespace TravelApi.Controllers
 {
+  [ApiVersionNeutral]
   [Route("api/[controller]")]
   [ApiController]
   public class LocationsController : ControllerBase
@@ -19,10 +20,11 @@ namespace TravelApi.Controllers
     {
       _db = db;
     }
-    [HttpGet]
+
+    [HttpGet("all")]
     public async Task<ActionResult<IEnumerable<Location>>> Get(string country, string city)
     {
-      var query = _db.Locations.AsQueryable();
+      var query = _db.Locations.Include(entry => entry.Reviews).AsQueryable();
       if (country != null)
       {
         query = query.Where(entry => entry.Country == country);
@@ -41,6 +43,7 @@ namespace TravelApi.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<Location>> GetLocation(int id)
     {
+      // var thisLocation = _db.Locations.FirstOrDefault(entry => entry.City == city).LocationId;
       var location = await _db.Locations.FindAsync(id);
       if (location == null)
       {

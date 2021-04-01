@@ -43,33 +43,6 @@ namespace TravelApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Locations",
-                columns: new[] { "LocationId", "City", "Country" },
-                values: new object[,]
-                {
-                    { 1, "Seattle", "USA" },
-                    { 2, "Victoria", "Canada" },
-                    { 3, "Paris", "France" },
-                    { 4, "Hoi An", "Vietnam" },
-                    { 6, "Beijing", "China" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "ReviewId", "LocationId", "Rating", "Text", "Title" },
-                values: new object[] { 2, 1, 5, "Some more text", "Another Title" });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "ReviewId", "LocationId", "Rating", "Text", "Title" },
-                values: new object[] { 1, 2, 1, "Some text", "A title" });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "ReviewId", "LocationId", "Rating", "Text", "Title" },
-                values: new object[] { 3, 3, 4, "The most text text yet!", "Yet Another Title" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_LocationId",
                 table: "Reviews",

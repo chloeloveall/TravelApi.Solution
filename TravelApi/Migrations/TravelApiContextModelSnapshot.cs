@@ -31,38 +31,6 @@ namespace TravelApi.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Locations");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            City = "Seattle",
-                            Country = "USA"
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            City = "Victoria",
-                            Country = "Canada"
-                        },
-                        new
-                        {
-                            LocationId = 3,
-                            City = "Paris",
-                            Country = "France"
-                        },
-                        new
-                        {
-                            LocationId = 4,
-                            City = "Hoi An",
-                            Country = "Vietnam"
-                        },
-                        new
-                        {
-                            LocationId = 6,
-                            City = "Beijing",
-                            Country = "China"
-                        });
                 });
 
             modelBuilder.Entity("TravelApi.Models.Review", b =>
@@ -88,43 +56,15 @@ namespace TravelApi.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Reviews");
-
-                    b.HasData(
-                        new
-                        {
-                            ReviewId = 1,
-                            LocationId = 2,
-                            Rating = 1,
-                            Text = "Some text",
-                            Title = "A title"
-                        },
-                        new
-                        {
-                            ReviewId = 2,
-                            LocationId = 1,
-                            Rating = 5,
-                            Text = "Some more text",
-                            Title = "Another Title"
-                        },
-                        new
-                        {
-                            ReviewId = 3,
-                            LocationId = 3,
-                            Rating = 4,
-                            Text = "The most text text yet!",
-                            Title = "Yet Another Title"
-                        });
                 });
 
             modelBuilder.Entity("TravelApi.Models.Review", b =>
                 {
-                    b.HasOne("TravelApi.Models.Location", "Location")
+                    b.HasOne("TravelApi.Models.Location", null)
                         .WithMany("Reviews")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("TravelApi.Models.Location", b =>

@@ -11,12 +11,5 @@ namespace TravelApi.Models
 
         public DbSet<Location> Locations { get; set; }
         public DbSet<Review> Reviews { get; set; }
-
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //   modelBuilder.Entity<Location>()
-        //     .HasMany(r => r.Reviews)
-        //     .WithOne(l => l.Location);
-        // }
     } 
 }
