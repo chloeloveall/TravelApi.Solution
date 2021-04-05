@@ -10,8 +10,9 @@ using TravelApi.Models;
 
 namespace TravelApi.Controllers
 {
-  [ApiVersionNeutral]
-  [Route("api/[controller]")]
+  [ApiVersion("1.0")]
+  // [Route("api/[controller]")]
+  [Route("api/{v:apiVersion}/locations")] 
   [ApiController]
   public class LocationsController : ControllerBase
   {
