@@ -37,10 +37,11 @@ namespace TravelApi
           services.AddMvc(); 
           services.AddDbContext<TravelApiContext>(opt =>
             opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
+
           services.AddApiVersioning(o => {
             o.ReportApiVersions = true;
             o.AssumeDefaultVersionWhenUnspecified = true;
-            o.DefaultApiVersion = new ApiVersion(1, 0);
+            o.DefaultApiVersion = new ApiVersion(2, 0);
           });
         }
 
